@@ -465,6 +465,24 @@ ul {
     color: var(--color-black);
 }
 
+.filter-select {
+    display: none;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    background: #fff;
+    color: var(--color-text);
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23151515' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 20px;
+}
+
 .especiales-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -688,6 +706,14 @@ ul {
 
     .especiales-grid {
         grid-template-columns: 1fr;
+    }
+
+    .filters {
+        display: none;
+    }
+
+    .filter-select {
+        display: block;
     }
 
     .infodraw-card {

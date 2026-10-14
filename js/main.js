@@ -16,8 +16,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }, { once: true });
     });
 
-    // Filtro de categorías + paginación (12 en 12) en "Últimos especiales"
+    // Filtro de categorías (pills en desktop, select en mobile) + paginación (12 en 12)
     var filterPills = document.querySelectorAll('.filter-pill');
+    var filterSelect = document.querySelector('.filter-select');
     var especialesCards = Array.prototype.slice.call(document.querySelectorAll('.especiales-grid .card'));
     var verMasBtn = document.getElementById('especiales-ver-mas');
     var PAGE_SIZE = 12;
@@ -43,15 +44,31 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function setCategory(filterValue) {
+        currentCategory = filterValue === 'todos' ? null : filterValue;
+        visibleCount = PAGE_SIZE;
+
+        filterPills.forEach(function (p) {
+            p.classList.toggle('active', p.dataset.filter === filterValue);
+        });
+        if (filterSelect) {
+            filterSelect.value = filterValue;
+        }
+
+        render();
+    }
+
     filterPills.forEach(function (pill) {
         pill.addEventListener('click', function () {
-            filterPills.forEach(function (p) { p.classList.remove('active'); });
-            pill.classList.add('active');
-            currentCategory = pill.dataset.filter === 'todos' ? null : pill.dataset.filter;
-            visibleCount = PAGE_SIZE;
-            render();
+            setCategory(pill.dataset.filter);
         });
     });
+
+    if (filterSelect) {
+        filterSelect.addEventListener('change', function () {
+            setCategory(filterSelect.value);
+        });
+    }
 
     if (verMasBtn) {
         verMasBtn.addEventListener('click', function () {
