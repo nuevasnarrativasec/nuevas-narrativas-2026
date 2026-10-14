@@ -656,6 +656,11 @@ ul {
     margin-bottom: 4px;
 }
 
+.member-name a:hover {
+    text-decoration: underline;
+    color: #f7b501;
+}
+
 .member-role {
     font-size: 13px;
     font-weight: 400;
