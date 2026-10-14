@@ -1,0 +1,685 @@
+* {
+    box-sizing: border-box;
+    font-style: normal;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+    font-family: 'IvyPresto Headline Semibold';
+    src: url('../fonts/IvyPrestoHeadline-SemiBold.woff2') format('woff2'),
+        url('../fonts/IvyPrestoHeadline-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-display: swap;
+}
+
+:root {
+    --color-yellow: #f7b500;
+    --color-black: #111111;
+    --color-text: #1a1a1a;
+    --color-gray: #6e6e6e;
+    --color-gray-light: #9a9a9a;
+    --color-border: #e5e5e5;
+    --color-bg-thumb: #e4e4e4;
+    --color-red: #e3382b;
+    --font-serif: 'IvyPresto Headline Semibold', 'Noto Serif KR', serif;
+    --font-sans: 'Roboto', Arial, sans-serif;
+    --container-width: 1240px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-sans);
+    color: var(--color-text);
+    background: #ffffff;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    width: 100%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* ---------- Header ---------- */
+
+.site-header {
+    background-color: #F6F7ED;
+    padding-top: 28px;
+}
+
+.header-top {
+    display: flex;
+    align-items: center;
+    padding-bottom: 25px;
+}
+
+.logo img {
+    height: 75px;
+    width: auto;
+}
+
+.main-nav {
+    margin: 20px auto 0;
+    display: flex;
+    gap: 15px;
+    padding: 0;
+}
+
+.main-nav a {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-text);
+    border: 1px solid #c2c2c2;
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+.main-nav a:hover {
+    color: #f7b501;
+}
+
+/* ---------- Generic placeholder thumbnail ---------- */
+
+.thumb {
+    position: relative;
+    width: 100%;
+    background: var(--color-bg-thumb);
+    overflow: hidden;
+}
+
+.thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.thumb--empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.thumb-label {
+    font-size: 12px;
+    color: var(--color-gray-light);
+    padding: 12px;
+    line-height: 1.4;
+}
+
+/* ---------- Badges / pills shown over thumbnails ---------- */
+
+.badge-sm {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: var(--color-yellow);
+    color: var(--color-black);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    border-radius: 2px;
+    z-index: 2;
+    display: none;
+}
+
+.ver-especial {
+    position: absolute;
+    left: 14px;
+    bottom: 14px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: underline;
+    z-index: 2;
+    display: none;
+}
+
+.thumb::after {
+   /* content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0) 45%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;*/
+}
+
+.thumb--overlay::after {
+    opacity: 1;
+}
+
+/* ---------- Card component ---------- */
+
+.card {
+    display: block;
+}
+
+.card .thumb {
+    aspect-ratio: 4 / 3;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+.card-eyebrow {
+    font-size: 14px;
+    color: #000000;
+    margin-bottom: 6px;
+}
+
+.card-title {
+    font-family: 'IvyPresto Headline Semibold';
+    font-size: 1.1rem;
+    line-height: 1.3;
+    margin-bottom: 8px;
+}
+
+.card-desc {
+    font-size: 14px;
+    color: var(--color-gray);
+    line-height: 1.5;
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 48px;
+    padding: 48px 0 56px;
+}
+
+.hero-feature .thumb {
+    aspect-ratio: 16 / 10;
+    border-radius: 4px;
+    margin-bottom: 0;
+}
+
+.hero-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: var(--color-red);
+    color: #fff;
+    padding: 10px 16px;
+    z-index: 2;
+    border-radius: 2px;
+    line-height: 1.3;
+}
+
+.hero-badge strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+}
+
+.hero-badge span {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+}
+
+.feature-overlay {
+    position: absolute;
+    left: 24px;
+    bottom: 24px;
+    right: 24px;
+    z-index: 2;
+}
+
+.feature-overlay h2 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    color: #fff;
+    font-size: 40px;
+    line-height: 1.15;
+    margin-bottom: 14px;
+}
+
+.feature-overlay .ver-especial {
+    position: static;
+}
+
+.hero-title {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 32px;
+    margin: 12px 0;
+}
+
+.hero-desc {
+    font-size: 15px;
+    color: #000000;
+    line-height: 1.6;
+    max-width: 620px;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 24px;
+}
+
+/* ---------- Reconocimientos ---------- */
+
+.reconocimientos {
+    background-color: #F6F7ED;
+    max-width: 100%;
+    padding: 40px 0 48px;
+}
+    .reconocimientos .section-title{
+        border-top: 1px solid #c2c2c2;
+        max-width: 1240px;
+        margin: 0 auto 25px;
+        padding-top: 10px;
+    }
+
+.section-title {    
+    font-weight: 700;
+    font-size: 18px;
+   
+    
+}
+
+.awards-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.awards-row::-webkit-scrollbar {
+    display: none;
+}
+
+.award {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex: 0 0 auto;
+    padding-right: 36px;
+    margin-right: 36px;
+    text-align: center;
+}
+
+.award:last-of-type {
+    border-right: none;
+    margin-right: 0;
+    padding-right: 0;
+}
+
+.award img {
+    height: 115px;
+    width: auto;
+    flex: 0 0 auto;
+}
+
+.award-text {
+    min-width: 200px;
+    max-width: 215px;
+}
+
+.award-text strong {
+    display: block;
+    font: 1.1rem/1.2 'IvyPresto Headline Semibold';
+    margin-bottom: 8px;
+}
+
+.award-text span {
+    display: block;
+    font-size: 13px;
+    color: #151515;
+    line-height: 1.45;
+}
+    .award-text span b{
+        font-weight: 700;
+    }
+
+.awards-prev,
+.awards-next {
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 15%;
+    background: #464646;
+    color: #fff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.awards-next {
+    margin-left: auto;
+}
+
+.awards-wrap {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    max-width: 1240px;
+    margin: 0 auto;
+}
+
+.awards-dots {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+.awards-dots button {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: #c2c2c2;
+    cursor: pointer;
+}
+
+.awards-dots button.active {
+    background: #464646;
+    width: 20px;
+    border-radius: 4px;
+}
+
+/* ---------- Ultimos especiales ---------- */
+
+.especiales {
+    background: #fafafa;
+    padding: 56px 0;
+}
+
+.especiales-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.especiales-head .section-title {
+    margin-bottom: 0;
+}
+
+.filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filter-pill {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 9px 18px;
+    border-radius: 20px;
+    border: 1px solid var(--color-border);
+    background: #fff;
+    color: var(--color-gray);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.filter-pill.active {
+    background: var(--color-black);
+    color: #fff;
+    border-color: var(--color-black);
+}
+
+.filter-pill:hover:not(.active) {
+    border-color: var(--color-black);
+    color: var(--color-black);
+}
+
+.especiales-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 36px 24px;
+}
+
+/* ---------- Infodraws ---------- */
+
+.infodraws {
+    padding: 10px 0 56px;
+    border-top: 1px solid #000;
+}
+
+.section-head-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+}
+
+.ver-mas {
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.infodraws-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.infodraw-card .thumb {
+    aspect-ratio: 3 / 4;
+    border-radius: 4px;
+    margin-bottom: 14px;
+}
+
+.infodraw-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #fff;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    z-index: 2;
+    display: none;
+}
+
+.infodraw-badge::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-red);
+}
+
+.infodraw-title {
+    font-family: 'IvyPresto Headline Semibold';
+    font-size: 1.1rem;
+    line-height: 1.35;
+}
+
+/* ---------- Texto institucional (Que hacemos / Quienes somos) ---------- */
+
+.texto-institucional {
+    padding: 0;
+    max-width: 760px;
+    border-left: 1px solid #ffcc01;
+    margin: 20px auto 50px;
+    padding-left: 20px;
+}
+
+.texto-institucional h2 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 30px;
+    margin-bottom: 16px;
+}
+
+.texto-institucional p {
+    font-size: 15px;
+    color: #151515;
+    line-height: 1.7;
+    font-family:'Noto Serif KR', serif;
+    font-weight: 500;
+}
+
+/* ---------- Equipo ---------- */
+
+.equipo {
+    padding: 48px 0 72px;
+}
+
+.equipo-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 24px;
+}
+
+.member {
+    text-align: center;
+}
+
+.member img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    margin: 0 auto 16px;
+    object-fit: cover;
+}
+
+.member-name {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 17px;
+    margin-bottom: 4px;
+}
+
+.member-role {
+    font-size: 13px;
+    font-weight: 400;
+    color: #151515;
+    margin-bottom: 8px;
+}
+
+.member-bio {
+    font-size: 12px;
+    color: #151515;
+    line-height: 1.5;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1024px) {
+    .hero {
+        grid-template-columns: 1fr;
+        padding: 24px;
+    }
+
+    .especiales-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .infodraws-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .equipo-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 32px 16px;
+    }
+}
+
+@media (max-width: 640px) {
+    .header-top {
+        justify-content: center;
+    }
+
+    .main-nav {
+        justify-content: center;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .especiales-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .infodraws-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .equipo-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .feature-overlay h2 {
+        font-size: 28px;
+    }
+    .reconocimientos .section-title{
+        max-width: 90%;
+    }
+    .award-text{
+        max-width: 160px;
+    }
+
+    .awards-prev,
+    .awards-next {
+        display: none;
+    }
+
+    .awards-dots {
+        display: flex;
+    }
+
+    .award{
+        padding-left: 36px;
+    }
+    .infodraws{
+        width: 90%;
+    }
+    .texto-institucional{
+        width: 90%;
+    }
+    .equipo{
+        padding: 48px 24px 72px;
+    }
+}
