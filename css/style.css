@@ -363,7 +363,9 @@ ul {
     }
 
 .awards-prev,
-.awards-next {
+.awards-next,
+.infodraws-prev,
+.infodraws-next {
     flex: 0 0 auto;
     width: 40px;
     height: 40px;
@@ -469,6 +471,33 @@ ul {
     gap: 36px 24px;
 }
 
+.especiales-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.ver-mas-btn {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 28px;
+    border-radius: 20px;
+    border: 1px solid var(--color-black);
+    background: #fff;
+    color: var(--color-black);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.ver-mas-btn:hover {
+    background: var(--color-black);
+    color: #fff;
+}
+
+.ver-mas-btn[hidden] {
+    display: none;
+}
+
 /* ---------- Infodraws ---------- */
 
 .infodraws {
@@ -491,10 +520,28 @@ ul {
     gap: 4px;
 }
 
-.infodraws-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+.infodraws-wrap {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.infodraws-row {
+    display: flex;
+    flex: 1;
+    min-width: 0;
     gap: 24px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+.infodraws-row::-webkit-scrollbar {
+    display: none;
+}
+
+.infodraw-card {
+    flex: 0 0 calc((100% - 3 * 24px) / 4);
 }
 
 .infodraw-card .thumb {
@@ -616,8 +663,8 @@ ul {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .infodraws-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .infodraw-card {
+        flex-basis: calc((100% - 24px) / 2);
     }
 
     .equipo-grid {
@@ -643,8 +690,13 @@ ul {
         grid-template-columns: 1fr;
     }
 
-    .infodraws-grid {
-        grid-template-columns: 1fr;
+    .infodraw-card {
+        flex-basis: 85%;
+    }
+
+    .infodraws-prev,
+    .infodraws-next {
+        display: none;
     }
 
     .equipo-grid {

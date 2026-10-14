@@ -16,54 +16,83 @@ document.addEventListener('DOMContentLoaded', function () {
         }, { once: true });
     });
 
-    // Filtro de categorías en "Últimos especiales"
+    // Filtro de categorías + paginación (12 en 12) en "Últimos especiales"
     var filterPills = document.querySelectorAll('.filter-pill');
-    var especialesCards = document.querySelectorAll('.especiales-grid .card');
+    var especialesCards = Array.prototype.slice.call(document.querySelectorAll('.especiales-grid .card'));
+    var verMasBtn = document.getElementById('especiales-ver-mas');
+    var PAGE_SIZE = 12;
+    var currentCategory = null;
+    var visibleCount = PAGE_SIZE;
 
-    function applyFilter(category) {
-        especialesCards.forEach(function (card) {
-            var matches = !category || card.dataset.category === category;
-            card.style.display = matches ? '' : 'none';
+    function render() {
+        var eligible = especialesCards.filter(function (card) {
+            return !currentCategory || card.dataset.category === currentCategory;
         });
+
+        eligible.forEach(function (card, index) {
+            card.style.display = index < visibleCount ? '' : 'none';
+        });
+        especialesCards.forEach(function (card) {
+            if (eligible.indexOf(card) === -1) {
+                card.style.display = 'none';
+            }
+        });
+
+        if (verMasBtn) {
+            verMasBtn.hidden = visibleCount >= eligible.length;
+        }
     }
 
     filterPills.forEach(function (pill) {
         pill.addEventListener('click', function () {
-            var wasActive = pill.classList.contains('active');
             filterPills.forEach(function (p) { p.classList.remove('active'); });
-            if (wasActive) {
-                applyFilter(null);
-            } else {
-                pill.classList.add('active');
-                applyFilter(pill.dataset.filter);
-            }
+            pill.classList.add('active');
+            currentCategory = pill.dataset.filter === 'todos' ? null : pill.dataset.filter;
+            visibleCount = PAGE_SIZE;
+            render();
         });
     });
 
+    if (verMasBtn) {
+        verMasBtn.addEventListener('click', function () {
+            visibleCount += PAGE_SIZE;
+            render();
+        });
+    }
+
+    render();
+
+    // Carrusel reutilizable: conecta una fila con scroll horizontal a sus flechas prev/next
+    function initCarousel(row, prevBtn, nextBtn) {
+        if (!row) return;
+        if (nextBtn) {
+            nextBtn.addEventListener('click', function () {
+                var step = row.clientWidth * 0.6;
+                var atEnd = row.scrollLeft + row.clientWidth >= row.scrollWidth - 4;
+                row.scrollTo({
+                    left: atEnd ? 0 : row.scrollLeft + step,
+                    behavior: 'smooth'
+                });
+            });
+        }
+        if (prevBtn) {
+            prevBtn.addEventListener('click', function () {
+                var step = row.clientWidth * 0.6;
+                var atStart = row.scrollLeft <= 4;
+                row.scrollTo({
+                    left: atStart ? row.scrollWidth : row.scrollLeft - step,
+                    behavior: 'smooth'
+                });
+            });
+        }
+    }
+
     // Carrusel de "Los reconocimientos"
     var awardsRow = document.querySelector('.awards-row');
-    var awardsPrev = document.querySelector('.awards-prev');
-    var awardsNext = document.querySelector('.awards-next');
-    if (awardsRow && awardsNext) {
-        awardsNext.addEventListener('click', function () {
-            var step = awardsRow.clientWidth * 0.6;
-            var atEnd = awardsRow.scrollLeft + awardsRow.clientWidth >= awardsRow.scrollWidth - 4;
-            awardsRow.scrollTo({
-                left: atEnd ? 0 : awardsRow.scrollLeft + step,
-                behavior: 'smooth'
-            });
-        });
-    }
-    if (awardsRow && awardsPrev) {
-        awardsPrev.addEventListener('click', function () {
-            var step = awardsRow.clientWidth * 0.6;
-            var atStart = awardsRow.scrollLeft <= 4;
-            awardsRow.scrollTo({
-                left: atStart ? awardsRow.scrollWidth : awardsRow.scrollLeft - step,
-                behavior: 'smooth'
-            });
-        });
-    }
+    initCarousel(awardsRow, document.querySelector('.awards-prev'), document.querySelector('.awards-next'));
+
+    // Carrusel de "Infodraws"
+    initCarousel(document.querySelector('.infodraws-row'), document.querySelector('.infodraws-prev'), document.querySelector('.infodraws-next'));
 
     // Bullets del carrusel de "Los reconocimientos" (reemplazan las flechas en mobile)
     var awardsDots = document.querySelector('.awards-dots');
