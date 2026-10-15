@@ -146,4 +146,15 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Acordeón de "Equipo"
+    var equipoToggle = document.querySelector('.equipo-toggle');
+    var equipoGrid = document.querySelector('.equipo-grid');
+    if (equipoToggle && equipoGrid) {
+        equipoToggle.addEventListener('click', function () {
+            var isOpen = equipoGrid.classList.toggle('is-open');
+            equipoToggle.classList.toggle('is-open', isOpen);
+            equipoToggle.setAttribute('aria-expanded', String(isOpen));
+        });
+    }
+
 });
