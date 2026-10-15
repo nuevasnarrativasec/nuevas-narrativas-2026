@@ -10,8 +10,8 @@
 
 @font-face {
     font-family: 'IvyPresto Headline Semibold';
-    src: url('../fonts/IvyPrestoHeadline-SemiBold.woff2') format('woff2'),
-        url('../fonts/IvyPrestoHeadline-SemiBold.woff') format('woff');
+    src: url('https://nuevas-narrativas-2026.nuevasnarrativas-ec.workers.dev/fonts/IvyPrestoHeadline-SemiBold.woff2') format('woff2'),
+        url('https://nuevas-narrativas-2026.nuevasnarrativas-ec.workers.dev/fonts/IvyPrestoHeadline-SemiBold.woff') format('woff');
     font-weight: 600;
     font-display: swap;
 }
